@@ -1,0 +1,6 @@
+<h3>Mortgage Summary</h3>
+<p>Over the {{model?.years}}-year amortization period, you will:</p>
+<ul clas='list'>
+    <li>have made {{summary?.totalNumberOfInstallments}} monthly ({{model?.frequency}}x per year) payments of {{summary?.monthlyPayment | currency}}</li>
+    <li>have paid {{summary?.principal | currency}} in principal, {{ summary?.interestPaid | currency }} in interest, for a total of {{summary?.totalAmount | currency}}</li>
+</ul>

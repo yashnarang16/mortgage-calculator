@@ -1,0 +1,53 @@
+<clr-control-container>
+    <label class="clr-col-12 clr-col-md-4">Mortgage Amount</label>
+    <input class="clr-col-12 clr-col-md-6" clrControl placeholder="Enter the amount" name="principal" appNumbersOnly appCurrencyFormatter
+        [(ngModel)]="model.principal" [value]='principalCtrl.value | currency' [ngModelOptions]="{updateOn: 'blur'}" #principalCtrl='ngModel' required minlength="1" />
+    <clr-control-helper>Please enter principle amount in this field ( in CAD )</clr-control-helper>
+    <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+    <clr-control-error *clrIfError="'minlength'">Must be at least 1 characters</clr-control-error>
+</clr-control-container>
+
+<clr-control-container>
+    <label class="clr-col-12 clr-col-md-4">Interest Rate</label> 
+    <input class="clr-col-12 clr-col-md-6" clrControl placeholder="Enter the rate of interest" name="rateofinterest" appNumbersOnly
+        [(ngModel)]="model.interest" [value]='interestCtrl.value | number: "1.2-2"' [ngModelOptions]="{updateOn: 'blur'}" #interestCtrl='ngModel' required minlength="1" />
+    <clr-control-helper>Please enter rate of interest ( in percentage )</clr-control-helper>
+    <clr-control-error *clrIfError="'required'">This is a required field</clr-control-error>
+    <clr-control-error *clrIfError="'minlength'">Must be at least 1 characters</clr-control-error>
+</clr-control-container>
+
+
+<clr-select-container>
+    <label class="clr-col-12 clr-col-md-4">Amortization Period in Years</label>
+    <select class="clr-col-12 clr-col-md-4" clrSelect name="years" [(ngModel)]="model.years" required>
+        <ng-container *ngFor='let year of years ;let i= index'>
+            <option [value]="year">{{year + ' Year'}}</option>
+        </ng-container>
+    </select>
+    <clr-control-helper>select number of years from dropdown</clr-control-helper>
+    <clr-control-error *clrIfError="'required'">This field is required!</clr-control-error>
+
+</clr-select-container>
+
+<clr-select-container>
+    <label class="clr-col-12 clr-col-md-4">Amortization Period in Months (Optional)</label>
+    <select class="clr-col-12 clr-col-md-4" clrSelect name="months" [(ngModel)]="model.months">
+        <option [value]="null">Select One</option>
+        <ng-container *ngFor='let month of months ;let i= index'>
+            <option [value]="month">{{month + ' Months'}}</option>
+        </ng-container>
+    </select>
+    <clr-control-helper>select number of months from dropdown if applicable</clr-control-helper>
+
+</clr-select-container>
+
+<clr-select-container>
+    <label class="clr-col-12 clr-col-md-4">Payment Frequency</label>
+    <select class="clr-col-12 clr-col-md-4" clrSelect name="frequency" [(ngModel)]="model.frequency">
+        <ng-container *ngFor='let freq of frequency ;let i= index'>
+            <option [value]="freq.code">{{ freq.label }}</option>
+        </ng-container>
+    </select>
+    <clr-control-helper>select payment frequency from dropdown</clr-control-helper>
+
+</clr-select-container>
