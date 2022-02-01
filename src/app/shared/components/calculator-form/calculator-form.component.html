@@ -21,7 +21,7 @@
     <label class="clr-col-12 clr-col-md-4">Amortization Period in Years</label>
     <select class="clr-col-12 clr-col-md-4" clrSelect name="years" [(ngModel)]="model.years" required>
         <ng-container *ngFor='let year of years ;let i= index'>
-            <option [value]="year">{{year + ' Year'}}</option>
+            <option [value]="year">{{year + ' Years'}}</option>
         </ng-container>
     </select>
     <clr-control-helper>select number of years from dropdown</clr-control-helper>

@@ -16,13 +16,15 @@
                 
             </div>
             <div class="card-footer">
-              <button type='submit' class="btn btn-sm">Calculate</button>
+              <button type='submit' class="btn btn-primary">Calculate</button>
+              <clr-spinner [clrInline]="true" *ngIf='loading$ | async'>Loading ...</clr-spinner>
             </div>
           </div>
           </form>
     </div>
 
     <div class="clr-col-lg-6 clr-col-sm-12 clr-col-12 clr-col-md-6">
+      
         <table class="table" *ngIf='summary'>
             <caption>
               Calculation Summary
