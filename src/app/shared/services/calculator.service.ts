@@ -29,7 +29,7 @@ export class CalculatorService {
 
 
   calculateNumberOfYears(model: ICalculator) {
-    if (model.months) {
+    if (model.months !== null) {
       return model.years + (model.months / 12);
     }
     return model.years || 0;
