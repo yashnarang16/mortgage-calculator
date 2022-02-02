@@ -6,8 +6,8 @@ import { ClarityModule } from '@clr/angular';
 import { FormsModule } from '@angular/forms';
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
-
+import { Component, DebugElement } from '@angular/core';
+import { By } from "@angular/platform-browser";
 @Component({
   selector: 'app-test-container',
   template: `
@@ -26,7 +26,7 @@ describe('NumbersOnlyDirective', () => {
   let fixture: ComponentFixture<ContainerComponent>;
   let container: ContainerComponent;
   let element: HTMLElement;
-
+  let inputEl: DebugElement;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ClarityModule],
@@ -37,13 +37,30 @@ describe('NumbersOnlyDirective', () => {
     });
 
     fixture = TestBed.createComponent(ContainerComponent);
-    // fixture.detectChanges(); // without the provider
+     fixture.detectChanges(); 
     container = fixture.componentInstance;
     element = fixture.nativeElement;
+    inputEl = fixture.debugElement.query(By.directive(NumbersOnlyDirective));
   });
-  it('should create an instance', () => {
-    const targetElement = <HTMLElement>element.querySelector('#principle');
-    expect(targetElement.getAttribute('name')).toBe('principal');
+  it('should create an instance with special chars', () => {
+    let event = {
+      key: 'Backspace'
+    }
+    inputEl.triggerEventHandler('keydown', event);
+    fixture.detectChanges();
+    expect(inputEl.nativeElement.value).toBe('');
+  });
+
+  it('should create an instance with alpha', () => {
+    let event: KeyboardEvent = {
+      key: 'A',
+      preventDefault() {
+        return '';
+      }
+    } as any;
+    inputEl.triggerEventHandler('keydown', event);
+    fixture.detectChanges();
+    expect(inputEl.nativeElement.value).toBe('');
   });
 });
 
